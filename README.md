@@ -1,5 +1,4 @@
 <h1>Backend Analyst Candidate Test</h1>
-<hr>
 
 This repository contains the solution for challenge bellow using .NET 8
 
