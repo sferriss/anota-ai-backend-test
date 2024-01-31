@@ -18,4 +18,11 @@ public class CategoryRepository : RepositoryBase<Category>, ICategoryRepository
      
         Collection = database.GetCollection<Category>(CollectionNames.Category);
     }
+
+    public async Task<bool> HasCategoryWithTitleAsync(string title)
+    {
+        return await Collection
+            .Find(Builders<Category>.Filter.Eq(x => x.Title, title))
+            .AnyAsync();
+    }
 }

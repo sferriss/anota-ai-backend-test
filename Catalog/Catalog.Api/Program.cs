@@ -6,6 +6,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.RegisterOptions();
+builder.RegisterApplicationDependencies();
 
 var app = builder.Build();
 

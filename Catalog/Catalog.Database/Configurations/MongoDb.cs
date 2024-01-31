@@ -1,12 +1,11 @@
-﻿using Catalog.Database.Mappings;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Conventions;
 
 namespace Catalog.Database.Configurations;
 
-public static class MongoDbMapping
+public static class MongoDb
 {
-    public static void ConfigureMappings()
+    public static void Configure()
     {
         var pack = new ConventionPack
         {
@@ -14,8 +13,5 @@ public static class MongoDbMapping
         };
         
         ConventionRegistry.Register("EnumStringConvention", pack, _ => true);
-
-        CategoryMapping.Configure();
-        ProductMapping.Configure();
     }
 }

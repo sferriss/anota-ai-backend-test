@@ -1,6 +1,13 @@
 @Catalog.Api_HostAddress = http://localhost:5025
 
-GET {{Catalog.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+### Post Create Category
+POST {{Catalog.Api_HostAddress}}/category/
+Content-Type: application/json
+
+{
+  "title": "teste1",
+  "owner": "string",
+  "description": "string"
+}
 
 ###

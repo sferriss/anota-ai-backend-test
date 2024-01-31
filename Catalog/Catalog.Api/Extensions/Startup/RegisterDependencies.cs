@@ -16,7 +16,6 @@ public static class RegisterDependencies
     
     public static void RegisterApplicationDependencies(this WebApplicationBuilder builder)
     {
-        builder.Services.ConfigurationMongoDb();
-        builder.Services.AddRepositories();
+        builder.Services.AddApplicationDependencies();
     }
 }
