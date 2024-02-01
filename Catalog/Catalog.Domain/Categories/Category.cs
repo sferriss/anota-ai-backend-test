@@ -12,11 +12,18 @@ public class Category : IEntity<string>
     public string Id { get; set; } = null!;
     
     [BsonElement("title")]
-    public string Title { get; set; } = null!;
+    public required string Title { get; set; }
     
     [BsonElement("owner")]
-    public string Owner { get; set; } = null!;
+    public required string Owner { get; set; }
     
     [BsonElement("description")]
-    public string Description { get; set; } = null!;
+    public required string Description { get; set; }
+
+    public void UpdateCategory(string? title, string? owner, string? description)
+    {
+        Title = title ?? Title;
+        Owner = owner ?? Owner;
+        Description = description ?? Description;
+    }
 }

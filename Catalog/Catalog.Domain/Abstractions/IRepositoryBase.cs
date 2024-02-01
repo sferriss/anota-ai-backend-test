@@ -9,4 +9,6 @@ public interface IRepositoryBase<T> where T : class, IEntity<string>
     T Add(T entity);
     
     void Remove(T entity);
+    
+    Task<IList<T>> GetAllAsync();
 }

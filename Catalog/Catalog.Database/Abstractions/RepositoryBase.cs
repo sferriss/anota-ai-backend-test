@@ -30,4 +30,9 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : class, IEntity<str
     {
         Collection.FindOneAndDelete(Builders<T>.Filter.Eq(x => x.Id, entity.Id));
     }
+
+    public async Task<IList<T>> GetAllAsync()
+    {
+        return await Collection.Find(Builders<T>.Filter.Empty).ToListAsync();
+    }
 }
