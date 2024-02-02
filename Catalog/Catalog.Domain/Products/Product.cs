@@ -26,4 +26,17 @@ public class Product : IEntity<string>
     
     [BsonElement("category")]
     public Category Category { get; set; } = null!;
+
+    public void SetCategory(Category category)
+    {
+        Category = category;
+    }
+    
+    public void Update(string? title, string? description, decimal? price, Category? category)
+    {
+        Title = title ?? Title;
+        Description = description ?? Description;
+        Price = price ?? Price;
+        Category = category ?? Category;
+    }
 }

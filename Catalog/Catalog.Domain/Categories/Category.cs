@@ -20,10 +20,9 @@ public class Category : IEntity<string>
     [BsonElement("description")]
     public required string Description { get; set; }
 
-    public void UpdateCategory(string? title, string? owner, string? description)
+    public void Update(string? title, string? description)
     {
         Title = title ?? Title;
-        Owner = owner ?? Owner;
         Description = description ?? Description;
     }
 }

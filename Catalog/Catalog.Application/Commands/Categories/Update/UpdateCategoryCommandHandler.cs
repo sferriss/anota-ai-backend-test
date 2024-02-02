@@ -12,9 +12,9 @@ public class UpdateCategoryCommandHandler(ICategoryRepository categoryRepository
 
         if (category is null) throw new NotFoundException("Category not found");
 
-        var (title, owner, description) = request;
+        var (title, description) = request;
         
-        category.UpdateCategory(title, owner, description);
+        category.Update(title, description);
         categoryRepository.Update(category);
     }
 }

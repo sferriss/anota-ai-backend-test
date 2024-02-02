@@ -35,5 +35,6 @@ public static class DependencyInjectionExtensions
     private static void AddMappers(this IServiceCollection services)
     {
         services.AddTransient<CategoryMapper>();
+        services.AddTransient<ProductMapper>();
     }
 }

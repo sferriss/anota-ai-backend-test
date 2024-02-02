@@ -8,7 +8,7 @@ namespace Catalog.Application.Mappers;
 [Mapper]
 public partial class CategoryMapper
 {
-    public partial Category CreateToDomain(CreateCategoryCommand request);
+    public partial Category ToDomain(CreateCategoryCommand request);
     
     public partial GetCategoryQueryResult ToResult(Category request);
 }

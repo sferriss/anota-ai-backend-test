@@ -15,7 +15,7 @@ public class CreateCategoryCommandHandler(ICategoryRepository categoryRepository
 
         if (hasCategory) throw new BusinessValidationException("There is already a category with that name.");
         
-        var newCategory = categoryRepository.Add(mapper.CreateToDomain(request));
+        var newCategory = categoryRepository.Add(mapper.ToDomain(request));
 
         return new CreateCategoryCommandResult (newCategory.Id);
     }
