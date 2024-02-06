@@ -1,11 +1,12 @@
-﻿using Catalog.Application.Exceptions;
+﻿using Catalog.Application.Commands.Aws.Sns;
+using Catalog.Application.Exceptions;
 using Catalog.Domain.Categories.Repositories;
 using Catalog.Domain.Products.Repositories;
 using MediatR;
 
 namespace Catalog.Application.Commands.Products.Update;
 
-public class UpdateProductCommandHandler(ICategoryRepository categoryRepository, IProductRepository productRepository)
+public class UpdateProductCommandHandler(ICategoryRepository categoryRepository, IProductRepository productRepository, ISender mediator)
     : IRequestHandler<UpdateProductCommand>
 {
     public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
@@ -25,5 +26,8 @@ public class UpdateProductCommandHandler(ICategoryRepository categoryRepository,
 
         product.Update(title, description, price, category);
         productRepository.Update(product);
+        
+        await mediator.Send(new SnsMessageCommand { OwnerId = product.Owner }, cancellationToken)
+            .ConfigureAwait(false);
     }
 }

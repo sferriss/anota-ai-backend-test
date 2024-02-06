@@ -1,4 +1,5 @@
-﻿using Catalog.Application.Exceptions;
+﻿using Catalog.Application.Commands.Aws.Sns;
+using Catalog.Application.Exceptions;
 using Catalog.Application.Mappers;
 using Catalog.Domain.Categories.Repositories;
 using Catalog.Domain.Products.Repositories;
@@ -9,7 +10,8 @@ namespace Catalog.Application.Commands.Products.Create;
 public class CreateProductCommandHandler(
     ICategoryRepository categoryRepository,
     IProductRepository productRepository,
-    ProductMapper mapper)
+    ProductMapper mapper,
+    ISender mediator)
     : IRequestHandler<CreateProductCommand, CreateProductCommandResult>
 {
     public async Task<CreateProductCommandResult> Handle(CreateProductCommand request,
@@ -24,6 +26,9 @@ public class CreateProductCommandHandler(
         product.SetCategory(category);
 
         productRepository.Add(product);
+
+        await mediator.Send(new SnsMessageCommand { OwnerId = product.Owner }, cancellationToken)
+            .ConfigureAwait(false);
 
         return new(product.Id);
     }
