@@ -1,12 +1,7 @@
 ﻿using Catalog.Application.Commands.Categories.Create;
-using Catalog.Application.Commands.Categories.Delete;
-using Catalog.Application.Commands.Categories.Update;
 using Catalog.Application.Commands.Products.Create;
 using Catalog.Application.Commands.Products.Delete;
 using Catalog.Application.Commands.Products.Update;
-using Catalog.Application.Queries.Categories.Common;
-using Catalog.Application.Queries.Categories.Get;
-using Catalog.Application.Queries.Categories.GetAll;
 using Catalog.Application.Queries.Products.Common;
 using Catalog.Application.Queries.Products.Get;
 using Catalog.Application.Queries.Products.GetAll;
