@@ -2,9 +2,9 @@
 using Catalog.Application.Commands.Products.Create;
 using Catalog.Application.Commands.Products.Delete;
 using Catalog.Application.Commands.Products.Update;
-using Catalog.Application.Queries.Products.Common;
 using Catalog.Application.Queries.Products.Get;
 using Catalog.Application.Queries.Products.GetAll;
+using Catalog.Domain.Aggregations;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,7 +48,7 @@ public class ProductController(ISender mediator) : ControllerBase
     }
     
     [HttpGet("{id:required}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetProductQueryResult))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductWithCategoryResult))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetProductAsync([FromRoute] string id)

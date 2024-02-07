@@ -1,15 +1,15 @@
 ﻿using Catalog.Application.Exceptions;
 using Catalog.Application.Mappers;
-using Catalog.Application.Queries.Categories.Common;
+using Catalog.Domain.Aggregations;
 using Catalog.Domain.Categories.Repositories;
 using MediatR;
 
 namespace Catalog.Application.Queries.Categories.Get;
 
 public class GetCategoryQueryHandler(ICategoryRepository categoryRepository, CategoryMapper mapper)
-    : IRequestHandler<GetCategoryQuery, GetCategoryQueryResult>
+    : IRequestHandler<GetCategoryQuery, CategoryResult>
 {
-    public async Task<GetCategoryQueryResult> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
+    public async Task<CategoryResult> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
     {
         var category = await categoryRepository.GetAsync(request.Id).ConfigureAwait(false);
 

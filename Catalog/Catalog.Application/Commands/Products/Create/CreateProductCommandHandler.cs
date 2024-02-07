@@ -23,7 +23,7 @@ public class CreateProductCommandHandler(
         if (category is null) throw new NotFoundException("Category not found");
 
         var product = mapper.ToDomain(request);
-        product.SetCategory(category);
+        product.SetCategory(category.Id);
 
         productRepository.Add(product);
 

@@ -24,19 +24,19 @@ public class Product : IEntity<string>
     [BsonElement("price")]
     public decimal Price { get; set; }
     
-    [BsonElement("category")]
-    public Category Category { get; set; } = null!;
+    [BsonElement("categoryId")]
+    public string CategoryId { get; set; } = null!;
 
-    public void SetCategory(Category category)
+    public void SetCategory(string categoryId)
     {
-        Category = category;
+        CategoryId = categoryId;
     }
     
-    public void Update(string? title, string? description, decimal? price, Category? category)
+    public void Update(string? title, string? description, decimal? price, string? categoryId)
     {
         Title = title ?? Title;
         Description = description ?? Description;
         Price = price ?? Price;
-        Category = category ?? Category;
+        CategoryId = categoryId ?? CategoryId;
     }
 }

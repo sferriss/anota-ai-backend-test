@@ -1,6 +1,6 @@
-﻿using Catalog.Application.Queries.Categories.Common;
+﻿using Catalog.Domain.Aggregations;
 using MediatR;
 
 namespace Catalog.Application.Queries.Categories.Get;
 
-public record GetCategoryQuery(string Id) : IRequest<GetCategoryQueryResult>;
+public record GetCategoryQuery(string Id) : IRequest<CategoryResult>;

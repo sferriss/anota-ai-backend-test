@@ -1,5 +1,5 @@
 ﻿using Catalog.Application.Commands.Categories.Create;
-using Catalog.Application.Queries.Categories.Common;
+using Catalog.Domain.Aggregations;
 using Catalog.Domain.Categories;
 using Riok.Mapperly.Abstractions;
 
@@ -10,5 +10,5 @@ public partial class CategoryMapper
 {
     public partial Category ToDomain(CreateCategoryCommand request);
     
-    public partial GetCategoryQueryResult ToResult(Category request);
+    public partial CategoryResult ToResult(Category request);
 }

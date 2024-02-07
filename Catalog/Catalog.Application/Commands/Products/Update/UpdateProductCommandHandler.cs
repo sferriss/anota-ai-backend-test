@@ -24,7 +24,7 @@ public class UpdateProductCommandHandler(ICategoryRepository categoryRepository,
         
         if(categoryId is not null && category is null) throw new NotFoundException("Category not found");
 
-        product.Update(title, description, price, category);
+        product.Update(title, description, price, category?.Id);
         productRepository.Update(product);
         
         await mediator.Send(new SnsMessageCommand { OwnerId = product.Owner }, cancellationToken)

@@ -1,8 +1,6 @@
-﻿using Catalog.Application.Queries.Categories.Common;
+﻿namespace Catalog.Domain.Aggregations;
 
-namespace Catalog.Application.Queries.Products.Common;
-
-public class GetProductQueryResult
+public class ProductWithCategoryResult
 {
     public required string Id { get; set; }
     
@@ -13,6 +11,6 @@ public class GetProductQueryResult
     public required  string Description { get; set; }
     
     public required decimal Price { get; set; }
-    
-    public required GetCategoryQueryResult Category { get; set; }
+
+    public CategoryResult Category { get; set; } = null!;
 }

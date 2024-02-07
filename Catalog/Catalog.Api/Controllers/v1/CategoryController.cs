@@ -1,9 +1,9 @@
 ﻿using Catalog.Application.Commands.Categories.Create;
 using Catalog.Application.Commands.Categories.Delete;
 using Catalog.Application.Commands.Categories.Update;
-using Catalog.Application.Queries.Categories.Common;
 using Catalog.Application.Queries.Categories.Get;
 using Catalog.Application.Queries.Categories.GetAll;
+using Catalog.Domain.Aggregations;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -47,7 +47,7 @@ public class CategoryController(ISender mediator) : ControllerBase
     }
     
     [HttpGet("{id:required}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetCategoryQueryResult))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CategoryResult))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetCategoryAsync([FromRoute] string id)

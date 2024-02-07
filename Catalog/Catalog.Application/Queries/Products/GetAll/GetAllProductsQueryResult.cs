@@ -1,8 +1,8 @@
-﻿using Catalog.Application.Queries.Products.Common;
+﻿using Catalog.Domain.Aggregations;
 
 namespace Catalog.Application.Queries.Products.GetAll;
 
 public class GetAllProductsQueryResult
 {
-    public GetProductQueryResult[]? Products { get; set; }
+    public ProductWithCategoryResult[]? Products { get; set; }
 }

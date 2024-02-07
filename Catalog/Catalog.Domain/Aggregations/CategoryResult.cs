@@ -1,6 +1,6 @@
-﻿namespace Catalog.Application.Queries.Categories.Common;
+﻿namespace Catalog.Domain.Aggregations;
 
-public class GetCategoryQueryResult
+public class CategoryResult
 {
     public required string Id { get; set; }
     

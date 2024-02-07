@@ -1,8 +1,8 @@
-﻿using Catalog.Application.Queries.Categories.Common;
+﻿using Catalog.Domain.Aggregations;
 
 namespace Catalog.Application.Queries.Categories.GetAll;
 
 public class GetAllCategoriesQueryResult
 {
-    public GetCategoryQueryResult[]? Categories { get; set; }
+    public CategoryResult[]? Categories { get; set; }
 }
