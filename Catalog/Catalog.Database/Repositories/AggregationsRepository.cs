@@ -57,26 +57,6 @@ public class AggregationsRepository : IAggregationsRepository
             .Aggregate<ProductWithCategoryResult>(pipeline)
             .ToListAsync();
 
-        return productsWithCategories.Select(pwc =>
-        {
-            CategoryResult category = new()
-            {
-                Id = pwc.Category.Id,
-                Title = pwc.Category.Title,
-                Owner = pwc.Category.Owner,
-                Description = pwc.Category.Description
-            };
-            
-            ProductWithCategoryResult productResult = new ()
-            {
-                Category = category,
-                Id = pwc.Id,
-                Title = pwc.Title,
-                Owner = pwc.Owner,
-                Description = pwc.Description,
-                Price = pwc.Price
-            };
-            return productResult;
-        }).ToList();
+        return productsWithCategories;
     }
 }
