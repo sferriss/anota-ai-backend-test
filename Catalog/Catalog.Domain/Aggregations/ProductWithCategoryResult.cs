@@ -12,5 +12,5 @@ public class ProductWithCategoryResult
     
     public required decimal Price { get; set; }
 
-    public CategoryResult Category { get; set; } = null!;
+    public CategoryResult? Category { get; set; }
 }

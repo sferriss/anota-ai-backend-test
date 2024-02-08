@@ -3,7 +3,6 @@ using Catalog.Application.Commands.Categories.Create;
 using Catalog.Application.Mappers;
 using Catalog.Database.Configurations;
 using Catalog.Database.Repositories;
-using Catalog.Domain.Aggregations.Repositories;
 using Catalog.Domain.Categories.Repositories;
 using Catalog.Domain.Products.Repositories;
 using FluentValidation;
@@ -31,7 +30,6 @@ public static class DependencyInjectionExtensions
     {
         services.AddTransient<IProductRepository, ProductRepository>();
         services.AddTransient<ICategoryRepository, CategoryRepository>();
-        services.AddTransient<IAggregationsRepository, AggregationsRepository>();
     }
     
     private static void AddMappers(this IServiceCollection services)

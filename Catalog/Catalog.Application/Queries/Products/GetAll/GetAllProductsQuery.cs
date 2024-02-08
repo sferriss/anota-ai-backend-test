@@ -2,4 +2,4 @@
 
 namespace Catalog.Application.Queries.Products.GetAll;
 
-public record GetAllProductsQuery : IRequest<GetAllProductsQueryResult>;
+public record GetAllProductsQuery(string Owner) : IRequest<GetAllProductsQueryResult>;

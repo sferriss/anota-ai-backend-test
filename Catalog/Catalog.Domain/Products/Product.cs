@@ -25,6 +25,7 @@ public class Product : IEntity<string>
     public decimal Price { get; set; }
     
     [BsonElement("categoryId")]
+    [BsonRepresentation(BsonType.ObjectId)]
     public string CategoryId { get; set; } = null!;
 
     public void SetCategory(string categoryId)

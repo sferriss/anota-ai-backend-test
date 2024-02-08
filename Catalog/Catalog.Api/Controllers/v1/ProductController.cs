@@ -62,9 +62,9 @@ public class ProductController(ISender mediator) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetAllProductsQueryResult))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetAllProductsAsync()
+    public async Task<IActionResult> GetAllProductsAsync([FromQuery] string owner)
     {
-        var result = await mediator.Send(new GetAllProductsQuery());
+        var result = await mediator.Send(new GetAllProductsQuery(owner));
         
         return Ok(result);
     }
