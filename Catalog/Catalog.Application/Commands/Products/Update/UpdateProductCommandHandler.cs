@@ -1,6 +1,7 @@
 ﻿using Catalog.Application.Commands.Aws.Sns;
 using Catalog.Application.Exceptions;
 using Catalog.Domain.Categories.Repositories;
+using Catalog.Domain.Notifications.Enums;
 using Catalog.Domain.Products.Repositories;
 using MediatR;
 
@@ -27,7 +28,15 @@ public class UpdateProductCommandHandler(ICategoryRepository categoryRepository,
         product.Update(title, description, price, category?.Id);
         productRepository.Update(product);
         
-        await mediator.Send(new SnsMessageCommand { OwnerId = product.Owner }, cancellationToken)
+        var snsMessageCommand = new SnsMessageCommand
+        {
+            OwnerId = product.Owner,
+            ItemId = product.Id,
+            Type = OperationType.Update,
+            ItemType = ItemType.Product
+        };
+        
+        await mediator.Send(snsMessageCommand, cancellationToken)
             .ConfigureAwait(false);
     }
 }
