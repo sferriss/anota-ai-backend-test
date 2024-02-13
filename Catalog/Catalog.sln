@@ -14,6 +14,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Domain", "Catalog.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Database", "Catalog.Database\Catalog.Database.csproj", "{39B28B20-7122-461D-9126-DE3640E4D598}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Workers", "4 - Workers", "{BB3CF8CE-9243-4E47-89EA-C82826D7C1D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Emit.Consumer", "Catalog.Emit.Consumer\Catalog.Emit.Consumer.csproj", "{51EDA50A-76F8-471E-93F7-633AB6FF0DB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +28,7 @@ Global
 		{2F88E0F2-8032-4CE6-9FFE-4AF3358FBB6C} = {7C8ECA6C-30E7-492C-BF58-705781D854EE}
 		{D0488D82-893F-416D-A7F3-BA096CC1E35F} = {7C8ECA6C-30E7-492C-BF58-705781D854EE}
 		{39B28B20-7122-461D-9126-DE3640E4D598} = {66FAEC43-2B6A-42D6-8E7C-82945BCFC0F3}
+		{51EDA50A-76F8-471E-93F7-633AB6FF0DB9} = {BB3CF8CE-9243-4E47-89EA-C82826D7C1D9}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2E8BEAB9-DF8C-46C4-AE6C-ABDCBF79846E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -42,5 +47,9 @@ Global
 		{39B28B20-7122-461D-9126-DE3640E4D598}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39B28B20-7122-461D-9126-DE3640E4D598}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39B28B20-7122-461D-9126-DE3640E4D598}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51EDA50A-76F8-471E-93F7-633AB6FF0DB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51EDA50A-76F8-471E-93F7-633AB6FF0DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51EDA50A-76F8-471E-93F7-633AB6FF0DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51EDA50A-76F8-471E-93F7-633AB6FF0DB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
