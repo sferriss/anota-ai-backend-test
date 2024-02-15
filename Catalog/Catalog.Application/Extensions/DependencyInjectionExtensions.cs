@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Catalog.Application.Commands.Categories.Create;
+using Catalog.Application.Commands.Files.Update;
 using Catalog.Application.Mappers;
 using Catalog.Database.Configurations;
 using Catalog.Database.Repositories;
@@ -24,6 +25,11 @@ public static class DependencyInjectionExtensions
         MongoDb.Configure();
         services.AddRepositories();
         services.AddMappers();
+    }
+    
+    public static void AddWorkerDependencies(this IServiceCollection services)
+    {
+        services.AddTransient<IUpdateJsonFileCommandHandler, UpdateJsonFileCommandHandler>();
     }
     
     private static void AddRepositories(this IServiceCollection services)

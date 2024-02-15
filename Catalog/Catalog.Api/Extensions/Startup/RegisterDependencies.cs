@@ -1,6 +1,5 @@
 ﻿using Amazon.S3;
 using Amazon.SimpleNotificationService;
-using Amazon.SQS;
 using Catalog.Api.Options;
 using Catalog.Application.Extensions;
 using Catalog.Domain.Options;
@@ -18,9 +17,8 @@ public static class RegisterDependencies
         builder.Services.AddSingleton<IMongoDbOptions>(x => x.GetRequiredService<IOptions<MongoDbOptions>>().Value);
         
         builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
-        builder.Services.AddAWSService<IAmazonS3>();
         builder.Services.AddAWSService<IAmazonSimpleNotificationService>(); 
-        builder.Services.AddAWSService<IAmazonSQS>(); 
+        builder.Services.AddAWSService<IAmazonS3>();
     }
     
     public static void RegisterApplicationDependencies(this WebApplicationBuilder builder)
