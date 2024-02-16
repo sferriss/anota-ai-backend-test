@@ -2,7 +2,6 @@
 using Catalog.Application.Exceptions;
 using Catalog.Application.Mappers;
 using Catalog.Domain.Categories.Repositories;
-using Catalog.Domain.Notifications.Enums;
 using MediatR;
 
 namespace Catalog.Application.Commands.Categories.Create;
@@ -22,9 +21,6 @@ public class CreateCategoryCommandHandler(ICategoryRepository categoryRepository
         var snsMessageCommand = new SnsMessageCommand
         {
             OwnerId = newCategory.Owner,
-            ItemId = newCategory.Id,
-            Type = OperationType.Create,
-            ItemType = ItemType.Category
         };
 
         await mediator.Send(snsMessageCommand, cancellationToken)

@@ -2,7 +2,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Amazon.SQS;
 using Amazon.SQS.Model;
-using Catalog.Application.Commands.Files.Update;
+using Catalog.Domain.Files.Commands;
 using Catalog.Domain.Notifications;
 
 namespace Catalog.Emit.Consumer;
@@ -21,11 +21,11 @@ public class Worker(ILogger<Worker> logger, IAmazonSQS sqsClient, IUpdateJsonFil
 
                 foreach (var message in response.Messages)
                 {
-                    var sqsMessage = DeserializeMessage(message, out var messageContent);
+                    var sqsMessage = JsonSerializer.Deserialize<SqsMessage>(message.Body);
 
                     logger.LogInformation("Mensagem recebida: {MessageId}", sqsMessage!.MessageId);
                     
-                    await jsonFileCommandHandler.ExecuteAsync(messageContent!).ConfigureAwait(false);
+                    await jsonFileCommandHandler.ExecuteAsync(sqsMessage.Message!).ConfigureAwait(false);
 
                     await DeleteMessageAsync(message, stoppingToken).ConfigureAwait(false);
                 }
@@ -37,18 +37,6 @@ public class Worker(ILogger<Worker> logger, IAmazonSQS sqsClient, IUpdateJsonFil
 
             await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
         }
-    }
-
-    private static SqsMessage? DeserializeMessage(Message message, out Notification? messageContent)
-    {
-        var options = new JsonSerializerOptions
-        {
-            Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
-        };
-                    
-        var sqsMessage = JsonSerializer.Deserialize<SqsMessage>(message.Body);
-        messageContent = JsonSerializer.Deserialize<Notification>(sqsMessage?.Message!, options);
-        return sqsMessage;
     }
 
     private async Task<ReceiveMessageResponse> ReceiveMessageAsync(CancellationToken stoppingToken)

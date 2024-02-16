@@ -1,5 +1,4 @@
 ﻿using Catalog.Domain.Abstractions;
-using Catalog.Domain.Categories;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 

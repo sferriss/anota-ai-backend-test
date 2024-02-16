@@ -1,6 +1,5 @@
 ﻿using Catalog.Application.Commands.Aws.Sns;
 using Catalog.Application.Exceptions;
-using Catalog.Domain.Notifications.Enums;
 using Catalog.Domain.Products.Repositories;
 using MediatR;
 
@@ -20,9 +19,6 @@ public class DeleteProductCommandHandler(IProductRepository productRepository, I
         var snsMessageCommand = new SnsMessageCommand
         {
             OwnerId = product.Owner,
-            ItemId = product.Id,
-            Type = OperationType.Delete,
-            ItemType = ItemType.Product
         };
         
         await mediator.Send(snsMessageCommand, cancellationToken)

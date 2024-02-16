@@ -5,6 +5,7 @@ using Catalog.Application.Mappers;
 using Catalog.Database.Configurations;
 using Catalog.Database.Repositories;
 using Catalog.Domain.Categories.Repositories;
+using Catalog.Domain.Files.Commands;
 using Catalog.Domain.Products.Repositories;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -42,6 +43,5 @@ public static class DependencyInjectionExtensions
     {
         services.AddTransient<CategoryMapper>();
         services.AddTransient<ProductMapper>();
-        services.AddTransient<NotificationMapper>();
     }
 }

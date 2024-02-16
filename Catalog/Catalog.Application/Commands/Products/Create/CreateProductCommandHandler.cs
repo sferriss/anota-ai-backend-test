@@ -2,7 +2,6 @@
 using Catalog.Application.Exceptions;
 using Catalog.Application.Mappers;
 using Catalog.Domain.Categories.Repositories;
-using Catalog.Domain.Notifications.Enums;
 using Catalog.Domain.Products.Repositories;
 using MediatR;
 
@@ -29,10 +28,7 @@ public class CreateProductCommandHandler(
         
         var snsMessageCommand = new SnsMessageCommand
         {
-            OwnerId = product.Owner,
-            ItemId = product.Id,
-            Type = OperationType.Create,
-            ItemType = ItemType.Product
+            OwnerId = product.Owner
         };
 
         await mediator.Send(snsMessageCommand, cancellationToken)

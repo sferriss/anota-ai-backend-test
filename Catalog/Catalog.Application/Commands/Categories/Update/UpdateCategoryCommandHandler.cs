@@ -1,7 +1,6 @@
 ﻿using Catalog.Application.Commands.Aws.Sns;
 using Catalog.Application.Exceptions;
 using Catalog.Domain.Categories.Repositories;
-using Catalog.Domain.Notifications.Enums;
 using MediatR;
 
 namespace Catalog.Application.Commands.Categories.Update;
@@ -23,9 +22,6 @@ public class UpdateCategoryCommandHandler(ICategoryRepository categoryRepository
         var snsMessageCommand = new SnsMessageCommand
         {
             OwnerId = category.Owner,
-            ItemId = category.Id,
-            Type = OperationType.Update,
-            ItemType = ItemType.Category
         };
 
         await mediator.Send(snsMessageCommand, cancellationToken)
