@@ -5,5 +5,5 @@ namespace Catalog.Domain.Products.Repositories;
 
 public interface IProductRepository : IRepositoryBase<Product>
 {
-    Task<List<ProductWithCategoryResult>> GetProductsWithCategoriesAsync(string owner);
+    Task<List<ProductWithCategoryResult>> GetWithCategoriesAsync(string owner);
 }

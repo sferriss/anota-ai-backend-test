@@ -8,7 +8,7 @@ public class GetAllProductsQueryHandler(IProductRepository productRepository) : 
     public async Task<GetAllProductsQueryResult> Handle(GetAllProductsQuery request,
         CancellationToken cancellationToken)
     {
-        var productsWithCategories = await productRepository.GetProductsWithCategoriesAsync(request.Owner)
+        var productsWithCategories = await productRepository.GetWithCategoriesAsync(request.Owner)
             .ConfigureAwait(false);
 
         return new()

@@ -18,13 +18,8 @@ public class UpdateCategoryCommandHandler(ICategoryRepository categoryRepository
         category.Update(title, description);
         
         categoryRepository.Update(category);
-        
-        var snsMessageCommand = new SnsMessageCommand
-        {
-            OwnerId = category.Owner,
-        };
 
-        await mediator.Send(snsMessageCommand, cancellationToken)
+        await mediator.Send(new SnsMessageCommand(category.Owner), cancellationToken)
             .ConfigureAwait(false);
     }
 }

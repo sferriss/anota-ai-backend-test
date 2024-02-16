@@ -4,5 +4,10 @@ namespace Catalog.Application.Commands.Aws.Sns;
 
 public class SnsMessageCommand : IRequest
 {
-    public required string OwnerId { get; init; }
+    public SnsMessageCommand(string ownerId)
+    {
+        OwnerId = ownerId;
+    }
+
+    public string OwnerId { get; init; }
 }

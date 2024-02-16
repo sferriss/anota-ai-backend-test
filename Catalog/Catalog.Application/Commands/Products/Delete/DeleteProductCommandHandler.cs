@@ -15,13 +15,8 @@ public class DeleteProductCommandHandler(IProductRepository productRepository, I
         if (product is null) throw new NotFoundException("Product not found");
         
         productRepository.Remove(product);
-
-        var snsMessageCommand = new SnsMessageCommand
-        {
-            OwnerId = product.Owner,
-        };
         
-        await mediator.Send(snsMessageCommand, cancellationToken)
+        await mediator.Send(new SnsMessageCommand(product.Owner), cancellationToken)
             .ConfigureAwait(false);
     }
 }

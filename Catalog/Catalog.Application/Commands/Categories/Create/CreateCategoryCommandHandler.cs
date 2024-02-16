@@ -11,19 +11,14 @@ public class CreateCategoryCommandHandler(ICategoryRepository categoryRepository
 {
     public async Task<CreateCategoryCommandResult> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
     {
-        var hasCategory = await categoryRepository.HasCategoryWithTitleAsync(request.Title)
+        var hasCategory = await categoryRepository.HasWithTitleAsync(request.Title)
             .ConfigureAwait(false);
 
         if (hasCategory) throw new BusinessValidationException("There is already a category with that name.");
         
         var newCategory = categoryRepository.Add(mapper.ToDomain(request));
-        
-        var snsMessageCommand = new SnsMessageCommand
-        {
-            OwnerId = newCategory.Owner,
-        };
 
-        await mediator.Send(snsMessageCommand, cancellationToken)
+        await mediator.Send(new SnsMessageCommand(newCategory.Owner), cancellationToken)
             .ConfigureAwait(false);
 
         return new CreateCategoryCommandResult (newCategory.Id);

@@ -21,7 +21,7 @@ public class ProductRepository : RepositoryBase<Product>, IProductRepository
         Collection = database.GetCollection<Product>(CollectionNames.Product);
     }
 
-    public Task<List<ProductWithCategoryResult>> GetProductsWithCategoriesAsync(string owner)
+    public Task<List<ProductWithCategoryResult>> GetWithCategoriesAsync(string owner)
     {
         var pipeline = new BsonDocument[]
         {

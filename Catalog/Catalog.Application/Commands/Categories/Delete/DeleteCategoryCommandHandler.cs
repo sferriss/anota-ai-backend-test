@@ -14,13 +14,8 @@ public class DeleteCategoryCommandHandler(ICategoryRepository categoryRepository
         if (category is null) throw new NotFoundException("Category not found");
         
         categoryRepository.Remove(category);
-        
-        var snsMessageCommand = new SnsMessageCommand
-        {
-            OwnerId = category.Owner,
-        };
 
-        await mediator.Send(snsMessageCommand, cancellationToken)
+        await mediator.Send(new SnsMessageCommand(category.Owner), cancellationToken)
             .ConfigureAwait(false);
     }
 }
