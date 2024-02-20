@@ -4,9 +4,15 @@ namespace Catalog.Domain.Files;
 
 public class FileDto
 {
-    [JsonPropertyName("owner")]
-    public required string Owner { get; set; }
+    public FileDto(string owner, CatalogDto[] catalog)
+    {
+        Owner = owner;
+        Catalog = catalog;
+    }
 
-    // [JsonPropertyName("catalog")]
-    // public required CategoryWithProducts[] Catalog { get; set; }
+    [JsonPropertyName("owner")]
+    public string Owner { get; set; }
+
+    [JsonPropertyName("catalog")]
+    public CatalogDto[] Catalog { get; set; }
 }

@@ -1,5 +1,4 @@
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Amazon.SQS;
 using Amazon.SQS.Model;
 using Catalog.Domain.Files.Commands;
@@ -23,7 +22,7 @@ public class Worker(ILogger<Worker> logger, IAmazonSQS sqsClient, IUpdateJsonFil
                 {
                     var sqsMessage = JsonSerializer.Deserialize<SqsMessage>(message.Body);
 
-                    logger.LogInformation("Mensagem recebida: {MessageId}", sqsMessage!.MessageId);
+                    logger.LogInformation("Message received: {MessageId}", sqsMessage!.MessageId);
                     
                     await jsonFileCommandHandler.ExecuteAsync(sqsMessage.Message!).ConfigureAwait(false);
 
@@ -32,7 +31,7 @@ public class Worker(ILogger<Worker> logger, IAmazonSQS sqsClient, IUpdateJsonFil
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Ocorreu um erro ao processar a mensagem.");
+                logger.LogError(ex, "An error occurred while processing the message.");
             }
 
             await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);

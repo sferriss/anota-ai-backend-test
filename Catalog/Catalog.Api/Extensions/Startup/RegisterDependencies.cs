@@ -1,6 +1,5 @@
 ﻿using Amazon.S3;
 using Amazon.SimpleNotificationService;
-using Catalog.Api.Options;
 using Catalog.Application.Extensions;
 using Catalog.Domain.Options;
 using Microsoft.Extensions.Options;

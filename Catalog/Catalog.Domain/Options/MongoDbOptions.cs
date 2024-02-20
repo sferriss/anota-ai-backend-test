@@ -1,6 +1,4 @@
-﻿using Catalog.Domain.Options;
-
-namespace Catalog.Api.Options;
+﻿namespace Catalog.Domain.Options;
 
 public class MongoDbOptions : IMongoDbOptions
 {

@@ -8,5 +8,7 @@ public interface IS3Services
     
     Task UploadFileAsync(string objectName, MemoryStream stream);
     
-    Task<MemoryStream> GetFileAsync(string objectName);
+    Task UploadFileAsync(string objectName, string file);
+    
+    Task<string> GetFileAsync(string objectName);
 }

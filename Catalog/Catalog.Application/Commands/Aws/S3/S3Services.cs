@@ -23,7 +23,7 @@ public class S3Services(IAmazonS3 amazonS3, ILogger<S3Services> logger) : IS3Ser
         }
         catch (AmazonS3Exception)
         {
-            logger.LogError("Arquivo não encontrado.");
+            logger.LogError("File not found.");
             return false;
         }
     }
@@ -45,7 +45,7 @@ public class S3Services(IAmazonS3 amazonS3, ILogger<S3Services> logger) : IS3Ser
             }
             catch (AmazonS3Exception ex)
             {
-                logger.LogError(ex, "Error ao deletar arquivo.");
+                logger.LogError(ex, "Error deleting file.");
             }
         }
     }
@@ -65,14 +65,31 @@ public class S3Services(IAmazonS3 amazonS3, ILogger<S3Services> logger) : IS3Ser
         }
         catch (AmazonS3Exception ex)
         {
-            logger.LogError(ex, "Error ao enviar o arquivo para o servidor.");
+            logger.LogError(ex, "Error when sending the file to the server.");
+        }
+    }
+    
+    public async Task UploadFileAsync(string objectName, string json)
+    {
+        try
+        {
+            var request = new PutObjectRequest
+            {
+                BucketName = _bucketName,
+                Key = objectName,
+                ContentBody = json
+            };
+
+            await amazonS3.PutObjectAsync(request).ConfigureAwait(false);
+        }
+        catch (AmazonS3Exception ex)
+        {
+            logger.LogError(ex, "Error when sending the file to the server.");
         }
     }
 
-    public async Task<MemoryStream> GetFileAsync(string objectName)
+    public async Task<string?> GetFileAsync(string objectName)
     {
-        var memoryStream = new MemoryStream();
-
         try
         {
             var request = new GetObjectRequest
@@ -82,16 +99,15 @@ public class S3Services(IAmazonS3 amazonS3, ILogger<S3Services> logger) : IS3Ser
             };
 
             using var response = await amazonS3.GetObjectAsync(request).ConfigureAwait(false);
-            await using var responseStream = response.ResponseStream;
+            using var reader = new StreamReader(response.ResponseStream);
+            var fileAsString = await reader.ReadToEndAsync().ConfigureAwait(false);
 
-            await responseStream.CopyToAsync(memoryStream);
-            memoryStream.Position = 0;
+            return fileAsString;
         }
         catch (AmazonS3Exception e)
         {
-            logger.LogError(e, "Error ao baixar o arquivo.");
+            logger.LogError(e, "Error when downloading the file.");
+            return null;
         }
-
-        return memoryStream;
     }
 }
