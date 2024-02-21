@@ -1,4 +1,5 @@
-﻿using Catalog.Application.Commands.Categories.Create;
+﻿using Catalog.Api.ExceptionHandlers.Responses;
+using Catalog.Application.Commands.Categories.Create;
 using Catalog.Application.Commands.Categories.Delete;
 using Catalog.Application.Commands.Categories.Update;
 using Catalog.Application.Queries.Categories.Get;
@@ -15,8 +16,8 @@ public class CategoryController(ISender mediator) : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CreateCategoryCommandResult))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionResponse))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ExceptionResponse))]
     public async Task<IActionResult> CreateCategoryAsync([FromBody] CreateCategoryCommand request)
     {
         var result = await mediator.Send(request);
@@ -26,8 +27,8 @@ public class CategoryController(ISender mediator) : ControllerBase
     
     [HttpPatch("{id:required}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ExceptionResponse))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ExceptionResponse))]
     public async Task<IActionResult> UpdateCategoryAsync([FromRoute] string id, [FromBody] UpdateCategoryCommand request)
     {
         await mediator.Send(request.WithId(id));
@@ -37,8 +38,8 @@ public class CategoryController(ISender mediator) : ControllerBase
     
     [HttpDelete("{id:required}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ExceptionResponse))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ExceptionResponse))]
     public async Task<IActionResult> DeleteCategoryAsync([FromRoute] string id)
     {
         await mediator.Send(new DeleteCategoryCommand(id));
@@ -48,8 +49,8 @@ public class CategoryController(ISender mediator) : ControllerBase
     
     [HttpGet("{id:required}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CategoryResult))]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ExceptionResponse))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ExceptionResponse))]
     public async Task<IActionResult> GetCategoryAsync([FromRoute] string id)
     {
         var result = await mediator.Send(new GetCategoryQuery(id));
@@ -59,8 +60,8 @@ public class CategoryController(ISender mediator) : ControllerBase
     
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetAllCategoriesQueryResult))]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ExceptionResponse))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ExceptionResponse))]
     public async Task<IActionResult> GetAllCategoriesAsync()
     {
         var result = await mediator.Send(new GetAllCategoriesQuery());
