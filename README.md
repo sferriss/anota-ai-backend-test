@@ -2,9 +2,7 @@
 
 This project is an API built using **C#, .NET Core 8, AWS Simple Queue Service, Mongo DB and AWS Simple Storage Service.**
 
-Official link
-
-https://github.com/githubanotaai/new-test-backend-nodejs
+[Official link]([https://editor-next.swagger.io/](https://github.com/githubanotaai/new-test-backend-nodejs))
 
 ### Swagger Documentation
 
