@@ -8,7 +8,7 @@ https://github.com/githubanotaai/new-test-backend-nodejs
 
 ### Swagger Documentation
 
-[Download](https://github.com/sferriss/anota-ai-backend-test/swagger.json)
+[Download](https://github.com/sferriss/anota-ai-backend-test/raw/main/swagger.json)
 
 Import the json file [here](https://editor-next.swagger.io/) to see API documentation
 
