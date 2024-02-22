@@ -13,11 +13,8 @@ public class GetCatalogQueryHandler (IS3Services s3Services) : IRequestHandler<G
         var fileName = $"{request.OwnerId}.json";
         var hasFile = await s3Services.ExistsFileAsync(fileName).ConfigureAwait(false);
 
-        if (!hasFile)
-        {
-            throw new NotFoundException("Catalog not found");
-        }
-
+        if (!hasFile) throw new NotFoundException("Catalog not found");
+        
         var file = await s3Services.GetFileAsync(fileName).ConfigureAwait(false);
 
         var result = JsonSerializer.Deserialize<FileDto>(file);

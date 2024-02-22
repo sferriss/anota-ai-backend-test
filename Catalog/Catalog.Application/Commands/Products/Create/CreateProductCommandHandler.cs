@@ -36,11 +36,8 @@ public class CreateProductCommandHandler(
         var category = await categoryRepository.GetAsync(request.CategoryId)
             .ConfigureAwait(false);
 
-        if (category is null)
-        {
-            throw new NotFoundException("Category not found");
-        }
-
+        if (category is null) throw new NotFoundException("Category not found");
+        
         if (!category.Owner.Equals(request.Owner))
             throw new BusinessValidationException("Category owner and product owner must be the same");
 
